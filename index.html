@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>منيو الباكيجات</title>
+  <style>
+    body { font-family: Arial; padding: 20px; text-align: center; direction: rtl; background: #f9f9f9; }
+    .form-row { margin: 10px 0; }
+    input, select, button { padding: 10px; margin: 5px; width: 90%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #8B4513; color: white; border: none; font-weight: bold; }
+    button:hover { background: #5c301e; }
+    .image-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 10px 0; }
+    .image-option { border: 2px solid transparent; border-radius: 10px; cursor: pointer; transition: 0.3s; text-align: center; }
+    .image-option.selected { border-color: green; }
+    .image-option img { width: 100px; height: 100px; object-fit: cover; border-radius: 10px; }
+    .product-list { max-width: 600px; margin: 20px auto; text-align: right; }
+    .product-item { background: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin-bottom: 10px; position: relative; }
+    .remove-btn { position: absolute; top: 10px; left: 10px; background: red; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; }
+    @media(max-width: 600px) {
+      .image-option img { width: 80px; height: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <img src="https://c.top4top.io/p_3407w0lzs1.png" alt="MOULÉ Logo" class="logo">
+  <h2>اختر تشكيلتك الفاخرة من الباكيجات</h2>
+
+  <div class="form-row"><input type="text" id="name" placeholder="اسم الحجز" /></div>
+  <div class="form-row"><input type="tel" id="phone" placeholder="رقم الجوال" /></div>
+  <div class="form-row"><input type="date" id="pickupDate" /></div>
+  <div class="form-row">
+    <select id="packageSize">
+      <option disabled selected>اختر حجم البكج</option>
+      <option>صغير</option>
+      <option>وسط</option>
+      <option>كبير</option>
+    </select>
+<p id="lockNotice" style="color: #b33; font-size: 14px; margin-top: -5px;">
+⚠️ ملاحظة: لا يمكنك تغيير حجم الباكج بعد إضافة أي منتج.
+</p>
+
+<style>
+  img.logo {
+    max-width: 140px;
+    margin-bottom: 15px;
+  }
+</style>
+
+<script>
+  const plateOptions = {
+    "صغير": [
+      { value: "أبيض صغير", label: "أبيض صغير", img: "https://d.top4top.io/p_3406vi1ns3.png" },
+      { value: "ذهبي كامل", label: "ذهبي كامل", img: "https://b.top4top.io/p_3406acmkf1.png" }
+    ],
+    "وسط": [
+      { value: "نص أبيض نص ذهبي", label: "نص أبيض نص ذهبي", img: "https://e.top4top.io/p_34061qck84.png" },
+      { value: "أبيض وسط", label: "أبيض وسط", img: "https://c.top4top.io/p_3406m7ak52.png" }
+    ],
+    "كبير": [
+      { value: "أبيض كبير", label: "أبيض كبير", img: "https://f.top4top.io/p_3406tc5065.png" }
+    ]
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const plateContainer = document.getElementById("plateOptions");
+    const packageSize = document.getElementById("packageSize");
+
+    packageSize.addEventListener("change", function () {
+      if (products.length > 0) {
+        alert("لا يمكن تغيير حجم الباكج بعد إضافة المنتجات. احذف المنتجات أولاً.");
+        this.value = previousPackageSize || "اختر حجم البكج";
+        return;
+      }
+
+      previousPackageSize = this.value;
+      const selectedSize = this.value;
+      plateContainer.innerHTML = "";
+      plateContainer.style.display = "flex";
+      selectedPlate = "";
+
+      if (plateOptions[selectedSize]) {
+        plateOptions[selectedSize].forEach(p => {
+          const div = document.createElement("div");
+          div.className = "image-option";
+          div.dataset.value = p.value;
+          div.innerHTML = `<img src="${p.img}" alt="${p.label}"><p>${p.label}</p>`;
+          div.onclick = function () {
+            document.querySelectorAll('#plateOptions .image-option').forEach(e => e.classList.remove('selected'));
+            div.classList.add('selected');
+            selectedPlate = p.value;
+          };
+          plateContainer.appendChild(div);
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  #plateOptions { display: none; }
+</style>
+<script>
+  const plateOptions = {
+    "صغير": [
+      { value: "أبيض صغير", label: "أبيض صغير", img: "https://d.top4top.io/p_3406vi1ns3.png" },
+      { value: "ذهبي كامل", label: "ذهبي كامل", img: "https://b.top4top.io/p_3406acmkf1.png" }
+    ],
+    "وسط": [
+      { value: "نص أبيض نص ذهبي", label: "نص أبيض نص ذهبي", img: "https://e.top4top.io/p_34061qck84.png" },
+      { value: "أبيض وسط", label: "أبيض وسط", img: "https://c.top4top.io/p_3406m7ak52.png" }
+    ],
+    "كبير": [
+      { value: "أبيض كبير", label: "أبيض كبير", img: "https://f.top4top.io/p_3406tc5065.png" }
+    ]
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const plateContainer = document.getElementById("plateOptions");
+    const packageSize = document.getElementById("packageSize");
+
+    packageSize.addEventListener("change", function () {
+      const selectedSize = this.value;
+      plateContainer.innerHTML = "";
+      plateContainer.style.display = "flex";
+      selectedPlate = "";
+
+      if (plateOptions[selectedSize]) {
+        plateOptions[selectedSize].forEach(p => {
+          const div = document.createElement("div");
+          div.className = "image-option";
+          div.dataset.value = p.value;
+          div.innerHTML = `<img src="${p.img}" alt="${p.label}"><p>${p.label}</p>`;
+          div.onclick = function () {
+            document.querySelectorAll('#plateOptions .image-option').forEach(e => e.classList.remove('selected'));
+            div.classList.add('selected');
+            selectedPlate = p.value;
+          };
+          plateContainer.appendChild(div);
+        });
+      }
+    });
+  });
+</script>
+
+<script>
+  const plateOptions = {
+    "صغير": [
+      { value: "أبيض صغير", label: "أبيض صغير", img: "https://d.top4top.io/p_3406vi1ns3.png" },
+      { value: "ذهبي كامل", label: "ذهبي كامل", img: "https://b.top4top.io/p_3406acmkf1.png" }
+    ],
+    "وسط": [
+      { value: "نص أبيض نص ذهبي", label: "نص أبيض نص ذهبي", img: "https://e.top4top.io/p_34061qck84.png" },
+      { value: "أبيض وسط", label: "أبيض وسط", img: "https://c.top4top.io/p_3406m7ak52.png" }
+    ],
+    "كبير": [
+      { value: "أبيض كبير", label: "أبيض كبير", img: "https://f.top4top.io/p_3406tc5065.png" }
+    ]
+  };
+
+  document.getElementById("packageSize").addEventListener("change", function () {
+    const selectedSize = this.value;
+    const plateContainer = document.getElementById("plateOptions");
+    plateContainer.innerHTML = "";
+    selectedPlate = "";
+
+    if (plateOptions[selectedSize]) {
+      plateOptions[selectedSize].forEach(p => {
+        const div = document.createElement("div");
+        div.className = "image-option";
+        div.dataset.value = p.value;
+        div.innerHTML = `<img src="${p.img}" alt="${p.label}"><p>${p.label}</p>`;
+        div.onclick = function () {
+          document.querySelectorAll('#plateOptions .image-option').forEach(e => e.classList.remove('selected'));
+          div.classList.add('selected');
+          selectedPlate = p.value;
+        };
+        plateContainer.appendChild(div);
+      });
+    }
+  });
+</script>
+
+  </div>
+
+  <hr>
+  <h3>➕ إضافة منتج للتشكيلة</h3>
+
+  <p>اختر شكل الصحن:</p>
+  <div class="image-grid" id="plateOptions"></div>
+    
+  </div>
+
+  <p>اختر نوع المنتج:</p>
+  <div class="image-grid" id="productOptions">
+    <div class="image-option" data-value="معمول"><img src="https://b.top4top.io/p_340724ypc9.png" alt="معمول"><p>معمول</p></div>
+    <div class="image-option" data-value="شابورة وبيتي فور"><img src="https://a.top4top.io/p_34078f4gd8.png" alt="شابورة وبيتي فور"><p>شابورة وبيتي فور</p></div>
+    <div class="image-option" data-value="ورق عنب وملفوف وكبة"><img src="https://l.top4top.io/p_3407gc6rq7.png" alt="ورق عنب وملفوف وكبة"><p>ورق عنب وملفوف وكبة</p></div>
+    <div class="image-option" data-value="معجنات"><img src="https://k.top4top.io/p_3407uz4sa6.png" alt="معجنات"><p>معجنات</p></div>
+    <div class="image-option" data-value="تارت وبيتي فور"><img src="https://j.top4top.io/p_3407119xn5.png" alt="تارت وبيتي فور"><p>تارت وبيتي فور</p></div>
+    <div class="image-option" data-value="شوكولاتة"><img src="https://i.top4top.io/p_34074geqp4.png" alt="شوكولاتة"><p>شوكولاتة</p></div>
+    <div class="image-option" data-value="سواريه"><img src="https://h.top4top.io/p_34075z98j1.png" alt="سواريه"><p>سواريه</p></div>
+    <div class="image-option" data-value="تمر محشي"><img src="https://f.top4top.io/p_34075h7cf1.png" alt="تمر محشي"><p>تمر محشي</p></div>
+    <div class="image-option" data-value="كيك"><img src="https://e.top4top.io/p_3407tsyir1.png" alt="كيك"><p>كيك</p></div>
+  </div>
+
+  <div class="form-row"><input type="number" id="productQty" placeholder="الكمية (عدد الصحون)" min="1" /></div>
+  <button onclick="addProduct()">إضافة المنتج</button>
+  <div id="productsContainer" class="product-list"></div>
+  <br />
+  <button onclick="submitOrder()">📦 إرسال الطلب عبر واتساب</button>
+
+  <script>
+    let selectedPlate = "";
+    let selectedProduct = "";
+    const products = [];
+
+    document.querySelectorAll('#plateOptions .image-option').forEach(el => {
+      el.onclick = () => {
+        document.querySelectorAll('#plateOptions .image-option').forEach(e => e.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedPlate = el.dataset.value;
+      };
+    });
+
+    document.querySelectorAll('#productOptions .image-option').forEach(el => {
+      el.onclick = () => {
+        document.querySelectorAll('#productOptions .image-option').forEach(e => e.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedProduct = el.dataset.value;
+      };
+    });
+
+    function addProduct() {
+      const qty = parseInt(document.getElementById('productQty').value || "0");
+      if (!selectedPlate || !selectedProduct || qty < 1) {
+        alert("يرجى اختيار الصحن والمنتج وإدخال الكمية");
+        return;
+      }
+      products.push({ plate: selectedPlate, product: selectedProduct, qty });
+      updateProductList();
+      document.getElementById('productQty').value = "";
+      selectedPlate = "";
+      selectedProduct = "";
+      document.querySelectorAll('.image-option').forEach(e => e.classList.remove('selected'));
+    }
+
+    function updateProductList() {
+      const container = document.getElementById("productsContainer");
+      container.innerHTML = "";
+      products.forEach((p, index) => {
+        const div = document.createElement("div");
+        div.className = "product-item";
+        div.innerHTML = `
+          <button class="remove-btn" onclick="removeProduct(${index})">×</button>
+          <strong>الصحن:</strong> ${p.plate}<br/>
+          <strong>المنتج:</strong> ${p.product}<br/>
+          <strong>الكمية:</strong> ${p.qty} صحون
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function removeProduct(index) {
+      products.splice(index, 1);
+      updateProductList();
+    }
+
+    function submitOrder() {
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const date = document.getElementById("pickupDate").value;
+      const size = document.getElementById("packageSize").value;
+      const today = new Date();
+      const pickup = new Date(date);
+      const diff = (pickup - today) / (1000 * 60 * 60 * 24);
+
+      if (!name || !phone || !date || !size) return alert("يرجى تعبئة كل الحقول");
+      if (diff < 5) return alert("تاريخ الاستلام يجب أن يكون بعد 5 أيام على الأقل");
+      if (products.length === 0) return alert("يرجى إضافة منتج واحد على الأقل");
+
+      const totalQty = products.reduce((sum, p) => sum + p.qty, 0);
+      if (totalQty < 4) return alert("يجب ألا يقل إجمالي عدد الصحون عن 4");
+
+      let msg = `طلب جديد:\n👤 الاسم: ${name}\n📱 الجوال: ${phone}\n📦 حجم البكج: ${size}\n📅 الاستلام: ${date}\n\n`;
+      products.forEach((p, i) => {
+        msg += `منتج ${i + 1}:\n- الصحن: ${p.plate}\n- المنتج: ${p.product}\n- الكمية: ${p.qty} صحون\n\n`;
+      });
+
+      const url = "https://wa.me/966557745170?text=" + encodeURIComponent(msg);
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
